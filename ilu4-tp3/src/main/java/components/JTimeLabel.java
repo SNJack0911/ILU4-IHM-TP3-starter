@@ -4,11 +4,16 @@
  */
 package components;
 
+import event.TimeModelEvent;
+import event.TimeModelListener;
+import java.time.LocalDateTime;
+import javax.swing.Timer;
+
 /**
  *
  * @author acarayon
  */
-public class JTimeLabel extends javax.swing.JPanel {
+public class JTimeLabel extends javax.swing.JPanel implements TimeModelListener{
 
     /**
      * Creates new form JTimeLabel
@@ -34,7 +39,13 @@ public class JTimeLabel extends javax.swing.JPanel {
         timeLabel.setText("currentTime");
         add(timeLabel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void timeChanged(TimeModelEvent evt){
+        String hour = Integer.toString(evt.getTime().getHour());
+        String minute = Integer.toString(evt.getTime().getMinute());
+        String seconde = Integer.toString(evt.getTime().getSecond());
+        timeLabel.setText(hour+"h"+minute+"m"+seconde+"s");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel timeLabel;
